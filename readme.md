@@ -68,11 +68,6 @@ It will help automate the management of product stock, sales tracking, and suppl
 ✅ Enhances record accuracy with real-time sales logging  
 ✅ Improves decision-making with reliable inventory data  
 
----
-## 🖼️ Presentation Slides
-Please refer to the PowerPoint file for the in-class presentation:
-
-📂 `WED_27443_Habimana_SmallRetailInventory_DB`
 
 <details>
 <summary>🖼️ Screenshot Placeholder</summary>
@@ -143,3 +138,68 @@ flowchart TD
   class C1 clerk
   class D1,E1 systemS
 
+
+## 📘 Phase II: Business Process Modeling (MIS)
+
+### 🔍 Scope & Purpose
+This business process models how inventory flows from monitoring to alert generation. It supports **MIS principles** by integrating users, systems, and automated decision logic to ensure stock accuracy and timely restocking.
+
+---
+
+### 👥 Key Actors and Systems
+| Role               | Responsibility                             |
+|--------------------|---------------------------------------------|
+| Inventory Manager  | Monitors stock and updates inventory        |
+| Supplier           | Delivers products                           |
+| Sales Clerk        | Records sales                               |
+| Inventory System   | Maintains stock data, evaluates thresholds  |
+| Alert System       | Notifies when stock is low                  |
+
+---
+
+### 🧠 Diagram Description (One-Page Brief)
+
+The diagram starts with the **Inventory Manager** monitoring stock. When a product is low, they receive deliveries from the **Supplier**. The system is then updated. When a **Sales Clerk** records a sale, the inventory is updated again. After each update, the **Inventory System** evaluates whether the stock has fallen below the set threshold. If so, the **Alert System** automatically notifies the manager for restocking.  
+
+This workflow supports MIS by:
+- Enabling **real-time decision-making**
+- Reducing **manual effort** through automation
+- **Improving efficiency** in retail operations
+
+The diagram shows logical flow from start to end, with responsibilities clearly mapped to each actor. The decision point and system automation reinforce how information systems streamline retail operations.
+
+---
+
+### 💻 Mermaid Code Reference
+```mermaid
+flowchart TD
+  start([● Process Start]) --> A1["🧑 Inventory Manager\n\nMonitor Stock Levels"]
+
+  A1 --> A2["📦 Receive Products"]
+
+  A2 --> B1["🚚 Supplier Delivery"]
+
+  B1 --> C1["🧾 Record Sale"]
+
+  C1 --> A3["📊 Update Inventory"]
+  A2 --> A3
+
+  A3 --> D1{{\n🔍 Stock < Threshold?\n}}
+
+  D1 -- Yes --> E1["❗ Send Alert"]
+
+  D1 -- No --> finish([✅ Process End])
+
+  E1 --> finish
+
+  classDef manager fill:#f9f,stroke:#333;
+  classDef supplier fill:#bbf,stroke:#333;
+  classDef clerk fill:#9f9,stroke:#333;
+  classDef system fill:#f96,stroke:#333;
+
+  class A1,A2,A3 manager
+  class B1 supplier
+  class C1 clerk
+  class D1,E1 system
+
+  

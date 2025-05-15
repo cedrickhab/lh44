@@ -98,19 +98,28 @@ This phase models the **inventory workflow** from stock monitoring to sales and 
 - **Mermaid** (Lightweight Markdown-based modeling)  
 - **Draw.io** (Standard BPMN format)  
 
-<details>
-<summary>📷 Diagram Previews</summary>
+
+
 
 #### 🔗 Mermaid Diagram  
 ![Mermaid Diagram](./screenshots/phaseII.png)
 
+<br>
+
 #### 🧩 Draw.io BPMN Diagram  
 ![Draw.io Diagram](./screenshots/PhaseII.drawio.png)
 
-</details>
+
 
 ### 🧠 MIS Value & Flow Summary
-The inventory process starts with stock monitoring. When stock is low, products are received from the supplier and recorded in the system. Sales transactions further update the inventory. A threshold check determines whether to trigger an alert. This flow enhances accuracy, automates decisions, and improves operational control.
+The diagram starts with the **Inventory Manager** monitoring stock. When a product is low, they receive deliveries from the **Supplier**. The system is then updated. When a **Sales Clerk** records a sale, the inventory is updated again. After each update, the **Inventory System** evaluates whether the stock has fallen below the set threshold. If so, the **Alert System** automatically notifies the manager for restocking.  
+
+This workflow supports MIS by:
+- Enabling **real-time decision-making**
+- Reducing **manual effort** through automation
+- **Improving efficiency** in retail operations
+
+The diagram shows logical flow from start to end, with responsibilities clearly mapped to each actor. The decision point and system automation reinforce how information systems streamline retail operations.
 
 ---
 

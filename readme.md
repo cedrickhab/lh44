@@ -81,5 +81,69 @@ Please refer to the PowerPoint file for the in-class presentation:
 
 </details>
 
+## 📘 Phase II: Business Process Modeling (MIS)
+
+### 🔍 Scope & Purpose
+This phase models the **inventory workflow** from stock monitoring to sales and low-stock alerting. It demonstrates how an **MIS supports decision-making** through automation and accurate data flow.
+
+### 👥 Key Actors
+| Role               | Responsibility                             |
+|--------------------|---------------------------------------------|
+| Inventory Manager  | Monitors stock and updates inventory        |
+| Supplier           | Delivers products                           |
+| Sales Clerk        | Records sales                               |
+| Inventory System   | Maintains stock data, evaluates thresholds  |
+| Alert System       | Notifies when stock is low                  |
+
+---
+
+### 🖼️ Process Diagram
+
+✅ **Tools Used:**  
+- **Draw.io** (Standard BPMN format)  
+- **Mermaid** (Lightweight Markdown-based modeling)
+
+<details>
+<summary>📷 Diagram Previews</summary>
+
+#### 🧩 Draw.io BPMN Diagram  
+![Draw.io Diagram](./screenshots/drawio_inventory_bpmn.png)
+
+#### 🔗 Mermaid Diagram  
+![Mermaid Diagram](./screenshots/mermaid_inventory_flow.png)
+
+</details>
+
+---
+
+### 🧠 MIS Value & Flow Summary
+The inventory process starts with stock monitoring. When stock is low, products are received from the supplier and recorded in the system. Sales transactions further update the inventory. A threshold check determines whether to trigger an alert. This flow enhances accuracy, automates decisions, and improves operational control.
+
+---
+
+### 💻 Mermaid Code Reference
+```mermaid
+flowchart TD
+  start([● Process Start]) --> A1["🧑 Inventory Manager\nMonitor Stock Levels"]
+  A1 --> A2["📦 Receive Products"]
+  A2 --> B1["🚚 Supplier Delivery"]
+  B1 --> C1["🧾 Record Sale"]
+  C1 --> A3["📊 Update Inventory"]
+  A2 --> A3
+  A3 --> D1{{"🔍 Stock < Threshold?"}}
+  D1 -- Yes --> E1["❗ Send Alert"]
+  D1 -- No --> finish([✅ Process End])
+  E1 --> finish
+
+  classDef manager fill:#f9f,stroke:#333;
+  classDef supplier fill:#bbf,stroke:#333;
+  classDef clerk fill:#9f9,stroke:#333;
+  classDef system fill:#f96,stroke:#333;
+
+  class A1,A2,A3 manager
+  class B1 supplier
+  class C1 clerk
+  class D1,E1 system
+
 
 

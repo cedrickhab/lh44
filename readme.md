@@ -56,7 +56,7 @@ It will help automate the management of product stock, sales tracking, and suppl
 | **Supplier_Product**| `Supplier_ID`, `Product_ID`, `Supply_Date`                                 |
 
 ### 🔗 Relationships
-- A **Supplier** can supply **many Products** (1:N)  
+- A **Supplier** can supply **many Products** (M:N)  
 - A **Product** can be involved in **many Sales** (1:N)  
 
 ---
@@ -201,7 +201,7 @@ To design a normalized, well-constrained, and relational data model that accurat
 ### 🔄 Relationships & Constraints
 
 - 🧩 **Suppliers ↔ Products** — *Many-to-Many* via `Supplier_Product`  
-- 📈 **Products → Sales** — *One-to-Many*  
+- 📈 **Products → Sales** — *One-to-Many* 
 - ✅ Foreign keys ensure data integrity  
 - ✅ CHECK constraints enforce data validity  
 - ✅ DEFAULT and UNIQUE improve usability and data quality  
@@ -248,5 +248,75 @@ To design a normalized, well-constrained, and relational data model that accurat
 > Contains complete code for all table creation, constraints, and relationships.
 
 ---
+---
+
+## 🏗️ Phase IV: Database Creation and Access Setup (via SQL Developer)
+
+### 🎯 Objective
+
+To create a dedicated Oracle PL/SQL database environment using SQL Developer as an **alternative to Oracle Enterprise Manager (OEM)**. This setup provides full access control and prepares the development environment for Phase V.
+
+---
+
+### 🔐 Task 1: PDB and User Creation (SQL Developer)
+
+The user and development environment were set up inside an Oracle **Pluggable Database (PDB)** using **SQL Developer**, which allows graphical interaction and full administrative capabilities.
+
+---
+
+### 🧰 Configuration Summary
+
+| Component             | Value                                  |
+|------------------------|----------------------------------------|
+| **Tool Used**         | SQL Developer (OEM Alternative)         |
+| **PDB Name**          | `wed_27443_cedrick_Retail_db`           |
+| **User Created**      | `cedrick27443`                          |
+| **Password**          | `cedrick`                               |
+| **Privileges Granted**| Full DBA privileges                     |
+
+---
+
+### 📸 Screenshot: PDB Creation in SQL Developer
+
+![PDB Creation](./screenshots/pdb.png)
+
+---
+<br>
+
+### 📸 Screenshot: User Created & Privileges Granted
+
+![Privileges](./screenshots/privileges.png)
+
+```sql
+-- SQL run inside SQL plus
+
+alter session set container=WED_27443_Cedrick_Retail_DB;
+CREATE USER cedrick27443 IDENTIFIED BY cedrick;
+GRANT all privileges to cedrick27443;
+GRANT SYSDBA to cedrick27443;
+
+```
+---
+
+### 📸 Screenshot: User Successfully Connected to PDB in SQL Developer
+
+![PDB User Connection](./screenshots/conn%20db.png)
+
+---
+
+### ✅ Summary
+
+| Step                             | Completed |
+|----------------------------------|-----------|
+| PDB created                      | ✅        |
+| Project user created             | ✅        |
+| Password set to first name       | ✅        |
+| DBA privileges granted           | ✅        |
+| SQL Developer used as OEM alt    | ✅        |
+| Screenshots taken and stored     | ✅        |
+
+---
+
+📌 **Next Up: Phase V – PL/SQL Development (Procedures, Functions, Triggers)**
 
 

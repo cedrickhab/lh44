@@ -107,10 +107,9 @@ This phase models the **inventory workflow** from stock monitoring to sales and 
 <summary>📷 Diagram Previews</summary>
 
 #### 🧩 Draw.io BPMN Diagram  
-![Draw.io Diagram](./screenshots/drawio_inventory_bpmn.png)
+![Draw.io Diagram](./screenshots/PhaseII.drawio.png)
 
-#### 🔗 Mermaid Diagram  
-![Mermaid Diagram](./screenshots/mermaid_inventory_flow.png)
+
 
 </details>
 

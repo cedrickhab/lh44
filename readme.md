@@ -106,15 +106,6 @@ This phase models the **inventory workflow** from stock monitoring to sales and 
 <details>
 <summary>📷 Diagram Previews</summary>
 
-#### 🧩 Draw.io BPMN Diagram  
-![Draw.io Diagram](./screenshots/PhaseII.drawio.png)
-
-
-
-</details>
-
----
-
 ### 🧠 MIS Value & Flow Summary
 The inventory process starts with stock monitoring. When stock is low, products are received from the supplier and recorded in the system. Sales transactions further update the inventory. A threshold check determines whether to trigger an alert. This flow enhances accuracy, automates decisions, and improves operational control.
 
@@ -144,5 +135,8 @@ flowchart TD
   class C1 clerk
   class D1,E1 system
 
+#### 🧩 Draw.io BPMN Diagram  
+![Draw.io Diagram](./screenshots/PhaseII.drawio.png)
+</details>
 
 

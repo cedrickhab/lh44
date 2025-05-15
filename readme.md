@@ -69,7 +69,6 @@ It will help automate the management of product stock, sales tracking, and suppl
 ✅ Improves decision-making with reliable inventory data  
 
 ---
-
 ## 🖼️ Presentation Slides
 Please refer to the PowerPoint file for the in-class presentation:
 
@@ -78,20 +77,9 @@ Please refer to the PowerPoint file for the in-class presentation:
 <details>
 <summary>🖼️ Screenshot Placeholder</summary>
 
-> Replace this section with actual screenshots after presentation day.
-
-![Slide Screenshot Placeholder](./screenshots/slide-preview.png)
+![phase I](./screenshots/phase%20I.png)
 
 </details>
 
----
-
-## 📁 File Naming Convention
-As per instructions:
-
-`WED_27443_Habimana_SmallRetailInventory_DB`
-
----
-🎯 *Stay tuned for Phase II: Business Process Modeling...*
 
 

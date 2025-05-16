@@ -316,7 +316,116 @@ GRANT SYSDBA to cedrick27443;
 | Screenshots taken and stored     | ✅        |
 
 ---
+---
 
-📌 **Next Up: Phase V – PL/SQL Development (Procedures, Functions, Triggers)**
+## 🧱 Phase V: Table Implementation and Data Insertion
+
+### 🎯 Objective
+
+To implement the physical database structure based on the logical model and insert meaningful, testable data. This phase ensures structural integrity, accurate constraints, and realistic data to support business operations and future PL/SQL programming.
+
+---
+
+### 🔨 Step 1: Table Creation
+
+✅ The following tables were created in the schema `WED_27443_Cedrick_Retail_DB` using SQL Developer:
+
+---
+
+#### 🧱 Table: Suppliers
+
+![Suppliers Table Created](./screenshots/supplier%20created.png)
+
+---
+
+#### 🧱 Table: Products
+
+![Products Table Created](./screenshots/prod%20created.png)
+
+---
+
+#### 🧱 Table: Sales
+
+![Sales Table Created](./screenshots/sales%20created.png)
+
+---
+
+#### 🧱 Table: Supplier_Product
+
+![Supplier_Product Table Created](./screenshots/sup_pro%20created.png)
+
+---
+
+### 📥 Step 2: Data Insertion
+
+Realistic data entries were inserted for each table to reflect meaningful retail operations.
+
+---
+
+#### 🗃️ Insertion: Suppliers
+
+![Suppliers Data Inserted](./screenshots/supp%20data.png)
+
+---
+
+#### 🗃️ Insertion: Products
+
+![Products Data Inserted](./screenshots/pro%20data.png)
+
+---
+
+#### 🗃️ Insertion: Sales
+
+![Sales Data Inserted](./screenshots/sales%20data.png)
+
+---
+
+#### 🗃️ Insertion: Supplier_Product
+
+![Supplier_Product Data Inserted](./screenshots/sup_pro%20data.png) 
+
+---
+
+### 🔍 Step 3: Data Integrity Validation
+
+A join query was executed to validate relationships and ensure referential integrity.
+
+> ✅ Result confirmed that:
+- All foreign keys work as expected
+- Many-to-many and one-to-many relationships are intact
+- Data is consistent and logically connected
+
+![Query Output](./screenshots/data%20integrity.png)
+
+---
+
+### 🛡️ Step 4: Constraints and Integrity
+
+| Constraint       | Applied To             | Type                  |
+|------------------|------------------------|------------------------|
+| `PRIMARY KEY`    | All 4 tables           | Uniquely identifies rows |
+| `FOREIGN KEY`    | Sales, Supplier_Product| Enforces referential integrity |
+| `NOT NULL`       | Most attributes        | Prevents null violations |
+| `UNIQUE`         | Suppliers.Contact      | Prevents duplicate entries |
+| `CHECK`          | Product price/quantity| Validates acceptable values |
+| `DEFAULT`        | Created_At, Supply_Date| Auto-fills dates       |
+
+---
+
+### ✅ Summary
+
+| Deliverable              | Status |
+|---------------------------|--------|
+| Physical table creation   | ✅     |
+| Data inserted             | ✅     |
+| Data integrity validated  | ✅     |
+| Constraints applied       | ✅     |
+| Screenshots added         | ✅     |
+
+---
+
+
+
+
 
 

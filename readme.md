@@ -69,7 +69,8 @@ It will help automate the management of product stock, sales tracking, and suppl
 ✅ Improves decision-making with reliable inventory data  
 
 ---
-```
+
+```mermaid
 flowchart TD
   A[🧍 Inventory Manager] -->|Adds Supplier Info| B[📦 Suppliers]
   A -->|Adds New Products| C[🛒 Products]
@@ -88,7 +89,6 @@ flowchart TD
   class A,D,H actor
   class B,C,E data
   class F,G,I system
-
 ```
 
 ---

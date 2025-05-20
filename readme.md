@@ -607,4 +607,256 @@ This package encapsulates reusable logic:
 
 ---
 
+---
+
+## 🧠 Phase VII: Advanced Database Programming and Auditing
+
+### 🎯 Objective
+
+To secure the inventory system by implementing **trigger-based restrictions**, a **centralized audit system**, and **package-based logging** to ensure real-time monitoring, access control, and accountability for all table-level actions.
+
+---
+
+## 🔍 Problem Statement
+
+Small retail databases are vulnerable to unauthorized or unintended changes during business-critical times. This project implements advanced features like:
+
+- ❌ Preventing table changes during weekdays and holidays
+- 🕵️ Tracking who tried to change what and when
+- 📦 Centralizing audit logic via PL/SQL packages
+
+This adds a layer of **governance**, **traceability**, and **control**, critical for Management Information Systems.
+
+---
+
+## 📅 Holiday Restriction System
+
+### ✅ `holiday_calendar` Table
+
+Used to store blocked dates (holidays).
+
+```sql
+CREATE TABLE holiday_calendar (
+    holiday_date DATE PRIMARY KEY,
+    description  VARCHAR2(100)
+);
+
+-- Sample holiday entries
+INSERT INTO holiday_calendar VALUES (TO_DATE('2025-06-01','YYYY-MM-DD'), 'National Day');
+INSERT INTO holiday_calendar VALUES (TO_DATE('2025-06-15','YYYY-MM-DD'), 'Founders Day');
+COMMIT;
+```
+
+
+![Holiday Table](./screenshots/holiday.png)
+
+
+
+---
+
+## 🧨 Trigger-Based Restriction Logic
+
+### ✅ `trg_block_weekdays_holidays` on `Products`
+
+Prevents DML on weekdays and public holidays.
+
+```sql
+CREATE OR REPLACE TRIGGER trg_block_weekdays_holidays
+BEFORE INSERT OR UPDATE OR DELETE ON Products
+FOR EACH ROW
+DECLARE
+    v_today     VARCHAR2(10);
+    v_is_holiday NUMBER;
+BEGIN
+    SELECT TO_CHAR(SYSDATE, 'DY') INTO v_today FROM dual;
+
+    SELECT COUNT(*) INTO v_is_holiday
+    FROM holiday_calendar
+    WHERE holiday_date = TRUNC(SYSDATE);
+
+    IF v_today IN ('MON', 'TUE', 'WED', 'THU', 'FRI') OR v_is_holiday > 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, '🔒 DML blocked: Not allowed on weekdays or holidays.');
+    END IF;
+END;
+```
+
+
+
+![Trigger Created](./screenshots/restr%20trigger.png)
+
+---
+
+---
+
+## 🕵️ Auditing System
+
+### ✅ `audit_log` Table
+
+Captures every insert/update/delete attempt with user ID, date, and status.
+
+```sql
+CREATE TABLE audit_log (
+    audit_id     NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id      VARCHAR2(30),
+    action_date  DATE DEFAULT SYSDATE,
+    table_name   VARCHAR2(50),
+    operation    VARCHAR2(20),
+    status       VARCHAR2(20),
+    remarks      VARCHAR2(100)
+);
+```
+
+
+![Audit Table](./screenshots/audit%20log%20created.png)
+
+---
+## 🔄 Trigger + Audit Combined
+
+Trigger uses the package to log **ALLOWED or DENIED** attempts.
+
+```sql
+CREATE OR REPLACE TRIGGER trg_audit_products
+BEFORE INSERT OR UPDATE OR DELETE ON Products
+FOR EACH ROW
+DECLARE
+    v_day        VARCHAR2(10);
+    v_is_holiday NUMBER;
+    v_status     VARCHAR2(20);
+BEGIN
+    SELECT TO_CHAR(SYSDATE, 'DY') INTO v_day FROM dual;
+    SELECT COUNT(*) INTO v_is_holiday
+    FROM holiday_calendar
+    WHERE holiday_date = TRUNC(SYSDATE);
+
+    IF v_day IN ('MON','TUE','WED','THU','FRI') OR v_is_holiday > 0 THEN
+        v_status := 'DENIED';
+        audit_pkg.log_action('PRODUCTS', 'BLOCKED DML', v_status, 'Blocked by weekday/holiday trigger');
+        RAISE_APPLICATION_ERROR(-20002, '🚫 Action denied by policy.');
+    ELSE
+        v_status := 'ALLOWED';
+        audit_pkg.log_action('PRODUCTS', 'DML', v_status, 'Weekend or holiday not detected.');
+    END IF;
+END;
+```
+
+![Trigger Audit](./screenshots/audit%20products.png)
+
+
+---
+
+## 📦 `audit_pkg` – Centralized Audit Logging Package
+
+### ✅ Package Specification
+
+```sql
+CREATE OR REPLACE PACKAGE audit_pkg IS
+  PROCEDURE log_action(
+    p_table VARCHAR2,
+    p_operation VARCHAR2,
+    p_status VARCHAR2,
+    p_remarks VARCHAR2
+  );
+END audit_pkg;
+```
+
+### ✅ Package Body
+
+```sql
+CREATE OR REPLACE PACKAGE BODY audit_pkg IS
+  PROCEDURE log_action(
+    p_table VARCHAR2,
+    p_operation VARCHAR2,
+    p_status VARCHAR2,
+    p_remarks VARCHAR2
+  ) IS
+  BEGIN
+    INSERT INTO audit_log (user_id, table_name, operation, status, remarks)
+    VALUES (USER, p_table, p_operation, p_status, p_remarks);
+  END;
+END audit_pkg;
+```
+
+![Package](./screenshots/audit%20package.png)
+
+**OPTIONAL PACKAGE BODY AUDIT:**
+
+![Package body](./screenshots/audit%20package%20body.png)
+
+---
+
+---
+
+## 🧪 Testing & Evidence
+
+### 🔬 1. ✅ Manual Log Entry (Weekend)
+
+```sql
+BEGIN
+  audit_pkg.log_action('PRODUCTS', 'TESTING', 'ALLOWED', 'Weekend - Manually Passed');
+END;
+```
+
+![Manual Log](./screenshots/problem%20completed.png)
+
+---
+### 🔬 2. ❌ Denied Insert (Weekday or Holiday)
+
+```sql
+INSERT INTO Products (P_Name, Price, Quantity)
+VALUES ('Test Product', 19.99, 10);
+```
+
+Expected: Fails + logged as "DENIED"
+
+![Insert Denied](./screenshots/phase%20VII%20test%20I.png)
+
+---
+
+### 🔬 3. 🔍 Viewing Audit Table
+
+```sql
+SELECT * FROM audit_log ORDER BY action_date DESC;
+```
+
+![Audit Table Log](./screenshots/phase%20VII%20test%202.png)
+
+---
+
+### 🔬 4. ❌ Denied update and delete (Weekday or Holiday)
+
+```sql
+UPDATE Products
+SET Quantity = Quantity + 5
+WHERE Product_ID = 1;
+```
+---
+---
+
+```sql
+DELETE FROM Products
+WHERE Product_ID = 2;
+```
+---
+
+![denied update and delete in weekdays and holidays](./screenshots/phase%20VII%20test%203.png)
+
+---
+
+## ✅ Summary of Requirements Completed
+
+| Requirement Area         | Task                                      | ✅ Status |
+|--------------------------|-------------------------------------------|-----------|
+| Problem Statement        | Clearly described + justified             | ✅        |
+| Holiday System           | Table created + data populated            | ✅        |
+| Trigger Logic            | Created for Products, Sales, Suppliers    | ✅        |
+| Auditing                 | Tracked actions with DENIED/ALLOWED logic | ✅        |
+| Packages                 | audit_pkg created and reused              | ✅        |
+| Testing & Screenshots    | All cases run and documented              | ✅        |
+
+---
+
+📌 **Phase VII Complete – System Secured and Audited**
+
+
+
 

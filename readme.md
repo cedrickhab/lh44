@@ -535,8 +535,8 @@ JOIN Products p ON s.Product_ID = p.Product_ID;
 ---
 
 
----
----
+
+
 
 ## 🧪 Testing:
 All PL/SQL components were **individually tested** using anonymous blocks and verified with realistic test data.
@@ -549,7 +549,7 @@ All PL/SQL components were **individually tested** using anonymous blocks and ve
 
 ![Function](./screenshots/TEST%20.png)
 
----
+
 ---
 ### ✅ Trigger-Products-Testing:  `trigger_stock_alert`
 

@@ -296,6 +296,13 @@ GRANT all privileges to cedrick27443;
 GRANT SYSDBA to cedrick27443;
 
 ```
+![OEM](./screenshots/OEM.png)
+<br>
+
+![OEM 1](./screenshots/OEM%2027443.png)
+<br>
+
+![OEM 2](./screenshots/OEM%20act.png)
 ---
 
 ### 📸 Screenshot: User Successfully Connected to PDB in SQL Developer

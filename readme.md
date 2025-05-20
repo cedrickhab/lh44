@@ -69,7 +69,8 @@ It will help automate the management of product stock, sales tracking, and suppl
 ✅ Improves decision-making with reliable inventory data  
 
 ---
-```erDiagram
+```
+erDiagram
 
   SUPPLIERS {
     NUMBER Supplier_ID PK
@@ -98,6 +99,7 @@ It will help automate the management of product stock, sales tracking, and suppl
   SUPPLIERS ||--o{ PRODUCTS : supplies
   PRODUCTS ||--o{ SALES : contains
 ```
+
 ---
 ![phase I](./screenshots/phase%20I.png)
 

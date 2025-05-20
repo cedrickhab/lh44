@@ -462,8 +462,149 @@ A join query was executed to validate relationships and ensure referential integ
 
 ---
 
+---
+
+## 🔧 Phase VI: PL/SQL Programming (Procedures, Functions, Triggers, Packages)
+
+### 🎯 Objective
+
+To implement business logic directly within the Oracle database using PL/SQL. This includes **automating operations**, **analyzing data**, and **ensuring reliability** through procedures, functions, triggers, and packages.
+
+---
+
+## 🧱 Database Operations
+
+### 🔁 DML Operations
+- `INSERT`, `UPDATE`, `DELETE` queries were used to manipulate table data.
+- Example: Updating product quantities, deleting old supplier entries, and inserting new sales.
+---
+![DML](./screenshots/DML.png)
+
+---
+
+### 🧩 DDL Operations
+- `CREATE`, `ALTER`, and `DROP` commands were executed to structure the database.
+- Example: Added new columns like `Last_Updated` and modified constraints during testing.
+---
+![DDL](./screenshots/DDL.png)
+
+---
+## 💡 Simple Analytics Problem Statement
+
+> “Analyze how many times each product has been sold to help determine restocking priorities.”
+
+This was implemented using a **Window Function** on the `Sales` table to track total sales per product.
+
+```sql
+SELECT 
+    p.Product_Name,
+    s.Product_ID,
+    SUM(s.Quantity_Sold) OVER (PARTITION BY s.Product_ID) AS Total_Sold
+FROM Sales s
+JOIN Products p ON s.Product_ID = p.Product_ID;
+```
+---
+![Problem statement](./screenshots/problem%20statement.png)
+
+---
+
+## 🛠️ PL/SQL Components
+
+### ✅ Procedure: `register_sale`
+
+- Records a new sale
+- Automatically decreases stock quantity
+- Warns if stock is low
+- Retrieved data using cursors
+
+
+---
+![Procedure](./screenshots/procedures.png)
+
+---
+---
+![Procedure 1](./screenshots/procedures%201.png)
+
+---
+---
+#####  !!Cursors:
+-data is now retrieved because of cursors
+
+![cursors procedure](./screenshots/procedures.png)
+
+---
+
+
+---
+---
+
+## 🧪 Testing:
+All PL/SQL components were **individually tested** using anonymous blocks and verified with realistic test data.
+
+---
+### ✅ Function-Quantity-Testing: `get_stock_level`
+
+- Returns the current quantity of a specified product
+- Useful for on-demand stock checks
+
+![Function](./screenshots/TEST%20.png)
+
+---
+---
+### ✅ Trigger-Products-Testing:  `trigger_stock_alert`
+
+- Fires automatically after a product’s quantity is updated
+- Alerts if quantity falls below threshold
+
+![Trigger](./screenshots/TEST%201%20ON%20products.png)
+
+---
+## 📦 PL/SQL Package: `inventory_pkg`
+
+This package encapsulates reusable logic:
+- `register_sale` procedure
+- `get_stock_level` function
+
+**Benefits:**
+- Modular code structure
+- Reusability and better organization
+---
+![Package spec](./screenshots/pack%20spec.png)
+
+---
+---
+![Package body 1](./screenshots/package%20bod1.png)
+
+---
+---
+![Package body 2](./screenshots/package%20bod%202.png)
+
+---
 
 
 
+---
+
+### ✅ Package-Testing
+
+![Package completed](./screenshots/pack%20spec,bod%20used%20completed.png)
+
+---
+
+## ✅ Summary of Deliverables
+
+| Task                           | Completed |
+|--------------------------------|-----------|
+| DDL / DML Commands             | ✅        |
+| Simple Analytics Query         | ✅        |
+| Procedure                      | ✅        |
+| Function                       | ✅        |
+| Cursor Use (in Procedure)      | ✅        |
+| Exception Handling             | ✅        |
+| Trigger                        | ✅        |
+| Package with Reusable Logic    | ✅        |
+| Testing + Screenshots          | ✅        |
+
+---
 
 

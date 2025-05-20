@@ -68,13 +68,40 @@ It will help automate the management of product stock, sales tracking, and suppl
 ✅ Enhances record accuracy with real-time sales logging  
 ✅ Improves decision-making with reliable inventory data  
 
-<details>
-<summary>🖼️ Screenshot Placeholder</summary>
+---
+```erDiagram
 
+  SUPPLIERS {
+    NUMBER Supplier_ID PK
+    VARCHAR Supplier_Name
+    VARCHAR Contact_Email
+    VARCHAR Phone
+    DATE Created_At
+  }
+
+  PRODUCTS {
+    NUMBER Product_ID PK
+    VARCHAR Product_Name
+    NUMBER Price
+    NUMBER Quantity
+    NUMBER Supplier_ID FK
+    DATE Created_At
+  }
+
+  SALES {
+    NUMBER Sale_ID PK
+    NUMBER Product_ID FK
+    NUMBER Quantity_Sold
+    DATE Sale_Date
+  }
+
+  SUPPLIERS ||--o{ PRODUCTS : supplies
+  PRODUCTS ||--o{ SALES : contains
+```
+---
 ![phase I](./screenshots/phase%20I.png)
 
-</details>
-
+---
 ---
 
 ## 📘 Phase II: Business Process Modeling (MIS)

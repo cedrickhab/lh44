@@ -295,23 +295,22 @@ CREATE USER cedrick27443 IDENTIFIED BY cedrick;
 GRANT all privileges to cedrick27443;
 GRANT SYSDBA to cedrick27443;
 ```
-
+---
+---
 <!-- OEM Screenshot -->
 ![OEM](./screenshots/OEM.png)
 ---
 
-<br><br><br>
-
+---
 <!-- OEM 1 Screenshot -->
 ![OEM 1](./screenshots/OEM%2027443.png)
 ---
 
-<br><br><br>
-
+---
 <!-- OEM 2 Screenshot -->
 ![OEM 2](./screenshots/OEM%20act.png)
 ---
-<br><br><br>
+
 
 ---
 

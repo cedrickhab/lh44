@@ -123,7 +123,7 @@ This phase models the **inventory workflow** from stock monitoring to sales and 
 #### 🔗 Mermaid Diagram  
 ![Mermaid Diagram](./screenshots/phaseII.png)
 
-<br>
+---
 
 #### 🧩 Draw.io BPMN Diagram  
 ![Draw.io Diagram](./screenshots/PhaseII.drawio.png)
@@ -758,7 +758,9 @@ CREATE OR REPLACE PACKAGE audit_pkg IS
   );
 END audit_pkg;
 ```
+![Package specification](./screenshots/audit%20package.png)
 
+---
 ### ✅ Package Body
 
 ```sql
@@ -775,14 +777,7 @@ CREATE OR REPLACE PACKAGE BODY audit_pkg IS
   END;
 END audit_pkg;
 ```
-
-![Package](./screenshots/audit%20package.png)
-
-**OPTIONAL PACKAGE BODY AUDIT:**
-
 ![Package body](./screenshots/audit%20package%20body.png)
-
----
 
 ---
 

@@ -297,10 +297,10 @@ GRANT SYSDBA to cedrick27443;
 
 ```
 ![OEM](./screenshots/OEM.png)
-<br>
+<br><br>
 
 ![OEM 1](./screenshots/OEM%2027443.png)
-<br>
+<br><br>
 
 ![OEM 2](./screenshots/OEM%20act.png)
 ---

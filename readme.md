@@ -70,34 +70,25 @@ It will help automate the management of product stock, sales tracking, and suppl
 
 ---
 ```
-erDiagram
+flowchart TD
+  A[🧍 Inventory Manager] -->|Adds Supplier Info| B[📦 Suppliers]
+  A -->|Adds New Products| C[🛒 Products]
+  B -->|Supplies Stock| C
+  D[🧾 Sales Clerk] -->|Records Sale| E[🧾 Sales]
+  E -->|Triggers Update| C
+  C -->|Check Inventory| F[(🔍 Stock Threshold Monitor)]
+  F -->|Low Stock?| G{Is Stock < 10?}
+  G -- Yes --> H[⚠️ Notify Manager]
+  G -- No --> I[✅ Normal Flow]
 
-  SUPPLIERS {
-    NUMBER Supplier_ID PK
-    VARCHAR Supplier_Name
-    VARCHAR Contact_Email
-    VARCHAR Phone
-    DATE Created_At
-  }
+  classDef actor fill:#e3f2fd,stroke:#2196f3,stroke-width:2px;
+  classDef data fill:#fff3e0,stroke:#fb8c00,stroke-width:2px;
+  classDef system fill:#fce4ec,stroke:#d81b60,stroke-width:2px;
 
-  PRODUCTS {
-    NUMBER Product_ID PK
-    VARCHAR Product_Name
-    NUMBER Price
-    NUMBER Quantity
-    NUMBER Supplier_ID FK
-    DATE Created_At
-  }
+  class A,D,H actor
+  class B,C,E data
+  class F,G,I system
 
-  SALES {
-    NUMBER Sale_ID PK
-    NUMBER Product_ID FK
-    NUMBER Quantity_Sold
-    DATE Sale_Date
-  }
-
-  SUPPLIERS ||--o{ PRODUCTS : supplies
-  PRODUCTS ||--o{ SALES : contains
 ```
 
 ---
